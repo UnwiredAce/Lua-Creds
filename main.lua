@@ -1,4 +1,5 @@
 local totalBalance = 10000
+local error = 0
 
 local day1Debiters = {
     {
@@ -52,17 +53,22 @@ function love.keypressed(key)
                 currentIndex = currentIndex + 1
             else
                 print("No amount")
+                totalBalance = totalBalance - day1Debiters[currentIndex].debtAmount
+                error = error + 1
                 currentIndex = currentIndex + 1
             end
         else
             print("Insufficient Balance")
+            totalBalance = totalBalance - day1Debiters[currentIndex].debtAmount
+            error = error + 1
             currentIndex = currentIndex + 1
         end
     end
 end
 
 function love.draw()
-    love.graphics.print("totalBalance: " .. totalBalance, 10, 10)
+    love.graphics.print("TotalBalance: " .. totalBalance, 10, 10)
+    love.graphics.print("ErrorCount: " .. error, 10, 25)
     if showData and day1Debiters[currentIndex] then
         local debtor = day1Debiters[currentIndex]
         love.graphics.print("Name: " .. debtor.name, 100, 100)

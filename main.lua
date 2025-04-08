@@ -8,31 +8,36 @@ local day1Debiters = {
         name = "Siddharth.S",
         balance = 4000,
         debtAmount = 3000,
-        paid = false
+        paid = false,
+        spritePath = "sprites/Character(1).png"
     },
     {
         name = "Suresh.R",
         balance = 1000,
         debtAmount = 2000,
-        paid = false
+        paid = false,
+        spritePath = "sprites/Character(2).png"
     },
     {
         name = "Ramesh.R",
         balance = 2000,
         debtAmount = 2000,
-        paid = false
+        paid = false,
+        spritePath = "sprites/Character(3).png"
     },
     {
         name = "Vignesh.R",
         balance = 4000,
         debtAmount = 7000,
-        paid = false
+        paid = false,
+        spritePath = "sprites/Character(4).png"
     },
     {
         name = "Ganesh.R",
         balance = 4000,
         debtAmount = 100000,
-        paid = false
+        paid = false,
+        spritePath = "sprites/Character(5).png"
     }
 }
 
@@ -83,10 +88,15 @@ function love.keypressed(key)
 end
 function love.load()
     credsSetup = love.graphics.newImage("sprites/CredsSetup.png")
+    SetupBG = love.graphics.newImage("sprites/SetupBG.png")
+    for _, debiter in ipairs(day1Debiters) do
+        debiter.sprite = love.graphics.newImage(debiter.spritePath)
+    end
 end
 
 function love.draw()
     love.graphics.draw(credsSetup, 0, 200, nil, 5)
+    love.graphics.draw(SetupBG, 0, 200, nil, 5)
     love.graphics.print("TotalBalance: " .. totalBalance, 10, 10)
     love.graphics.print("ErrorCount: " .. error, 10, 25)
     if showData and day1Debiters[currentIndex] then
@@ -96,6 +106,7 @@ function love.draw()
         love.graphics.print("Debt Amount: " .. debtor.debtAmount, 400, 360)
         love.graphics.print("Press [Y] to accept", 400, 400)
         love.graphics.print("Press [N] to reject", 400, 425)
+        love.graphics.draw(debtor.sprite, 85, 231, nil, 3)
     else
         love.graphics.print("Press [Space] to start showing debtors", 400, 300)
     end

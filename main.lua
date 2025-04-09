@@ -1,61 +1,11 @@
 love.graphics.setDefaultFilter("nearest", "nearest")
+local DebiterGenerator = require("randomGen")
+
+local day1Debiters = {}
 
 local totalBalance = 10000
 local error = 0
 local canInteract = false
-
-local day1Debiters = {
-    {
-        name = "Siddharth.S",
-        pin = 1234,
-        enteredPin = 1234,
-        balance = 4000,
-        debtAmount = 3000,
-        characterPath = "sprites/Character(1).png",
-        cardPath = "sprites/GreyCard.png",
-        detailsPath = "sprites/CardDetailsGrey.png"
-    },
-    {
-        name = "Suresh.R",
-        pin = 2345,
-        enteredPin = 2345,
-        balance = 1000,
-        debtAmount = 2000,
-        characterPath = "sprites/Character(2).png",
-        cardPath = "sprites/RedCard.png",
-        detailsPath = "sprites/CardDetailsRed.png"
-    },
-    {
-        name = "Ramesh.R",
-        pin = 4347,
-        enteredPin = 4348,
-        balance = 2000,
-        debtAmount = 2000,
-        characterPath = "sprites/Character(3).png",
-        cardPath = "sprites/BlueCard.png",
-        detailsPath = "sprites/CardDetailsBlue.png"
-    },
-    {
-        name = "Vignesh.R",
-        pin = 3456,
-        enteredPin = 4348,
-        balance = 4000,
-        debtAmount = 7000,
-        characterPath = "sprites/Character(4).png",
-        cardPath = "sprites/OrangeCard.png",
-        detailsPath = "sprites/CardDetailsOrange.png"
-    },
-    {
-        name = "Ganesh.R",
-        pin = 3456,
-        enteredPin = 3456,
-        balance = 4000,
-        debtAmount = 100000,
-        characterPath = "sprites/Character(5).png",
-        cardPath = "sprites/PinkCard.png",
-        detailsPath = "sprites/CardDetailsPink.png"
-    }
-}
 
 local currentIndex = 1
 local showData = false
@@ -64,6 +14,22 @@ local isDragging = false
 local dragOffsetX, dragOffsetY = 0, 0
 local cardX, cardY = 60, 425
 local originalCardX, originalCardY = 60, 425
+
+function love.load()
+    day1Debiters = DebiterGenerator.generateDay1Debiters(20)
+
+    for i, debiter in ipairs(day1Debiters) do
+        print(i .. ". " .. debiter.name .. " - PIN: " .. debiter.pin)
+    end
+    credsSetup = love.graphics.newImage("sprites/CredsSetup.png")
+    SetupBG = love.graphics.newImage("sprites/SetupBG.png")
+
+    for _, debiter in ipairs(day1Debiters) do
+        debiter.sprite = love.graphics.newImage(debiter.characterPath)
+        debiter.cardSprite = love.graphics.newImage(debiter.cardPath)
+        debiter.detailSprite = love.graphics.newImage(debiter.detailsPath)
+    end
+end
 
 function love.keypressed(key)
     if key == "space" then
@@ -122,18 +88,6 @@ function love.keypressed(key)
     end
 end
 
-
-
-function love.load()
-    credsSetup = love.graphics.newImage("sprites/CredsSetup.png")
-    SetupBG = love.graphics.newImage("sprites/SetupBG.png")
-
-    for _, debiter in ipairs(day1Debiters) do
-        debiter.sprite = love.graphics.newImage(debiter.characterPath)
-        debiter.cardSprite = love.graphics.newImage(debiter.cardPath)
-        debiter.detailSprite = love.graphics.newImage(debiter.detailsPath)
-    end
-end
 
 function love.update(dt)
     local debtor = day1Debiters[currentIndex]

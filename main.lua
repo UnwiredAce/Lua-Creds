@@ -16,6 +16,7 @@ local cardX, cardY = 60, 425
 local originalCardX, originalCardY = 60, 425
 
 function love.load()
+    math.randomseed(os.time())
     day1Debiters = DebiterGenerator.generateDay1Debiters(20)
 
     for i, debiter in ipairs(day1Debiters) do

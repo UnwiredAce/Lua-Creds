@@ -29,10 +29,16 @@ local cardColors = {
     {card = "sprites/BlueCard.png", details = "sprites/CardDetailsBlue.png"}
 }
 
+local pinData = {
+    {pin = 1234, enteredPin = 1234},
+    {pin = 7345, enteredPin = 7346},
+    {pin = 6688, enteredPin = 8866},
+    {pin = 5790, enteredPin = 5790}
+}
+
 local function getRandomDebiter()
     local name = names[math.random(#names)]
-    local pin = math.random(1000, 9999)
-    local enteredPin = math.random(1000, 9999)
+    local pin = pinData[math.random(#pinData)]
     local balance = math.random(1000, 10000)
     local debtAmount = math.random(1000, 10000)
     local characterId = math.random(1, 5)
@@ -40,8 +46,8 @@ local function getRandomDebiter()
 
     return {
         name = name,
-        pin = pin,
-        enteredPin = enteredPin,
+        pin = pin.pin,
+        enteredPin = pin.enteredPin,
         balance = balance,
         debtAmount = debtAmount,
         characterPath = "sprites/Character(" .. characterId .. ").png",

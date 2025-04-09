@@ -73,7 +73,7 @@ function love.keypressed(key)
             showData = false
         end
     end
-    if key == "y" then
+    if key == "y" and canInteract then
         if day1Debiters[currentIndex].balance >= day1Debiters[currentIndex].debtAmount then
             if totalBalance >= day1Debiters[currentIndex].debtAmount then
                 if day1Debiters[currentIndex].pin == day1Debiters[currentIndex].enteredPin then
@@ -96,9 +96,10 @@ function love.keypressed(key)
             error = error + 1
             currentIndex = currentIndex + 1
         end
-        originalCardX, originalCardY = 60, 425
+        canInteract = false
+        cardX, cardY = 60, 425
     end
-    if key == "n" then
+    if key == "n" and canInteract then
         if day1Debiters[currentIndex].balance >= day1Debiters[currentIndex].debtAmount and not day1Debiters[currentIndex].paid then
             if totalBalance >= day1Debiters[currentIndex].debtAmount then
                 if day1Debiters[currentIndex].pin ~= day1Debiters[currentIndex].enteredPin then
@@ -116,7 +117,8 @@ function love.keypressed(key)
             print("Insufficient Balance")
             currentIndex = currentIndex + 1
         end
-        originalCardX, originalCardY = 60, 425
+        canInteract = false
+        cardX, cardY = 60, 425
     end
 end
 

@@ -19,9 +19,6 @@ function love.load()
     math.randomseed(os.time())
     day1Debiters = DebiterGenerator.generateDay1Debiters(20)
 
-    for i, debiter in ipairs(day1Debiters) do
-        print(i .. ". " .. debiter.name .. " - PIN: " .. debiter.pin)
-    end
     credsSetup = love.graphics.newImage("sprites/CredsSetup.png")
     SetupBG = love.graphics.newImage("sprites/SetupBG.png")
 
@@ -112,10 +109,8 @@ function love.draw()
         love.graphics.draw(debtor.cardSprite, cardX, cardY, nil, 2)
         love.graphics.draw(debtor.sprite, 85, 230, nil, 3)
         if canInteract then
-            --love.graphics.draw(debtor.detailSprite, 350, 200, nil, 2)
             love.graphics.print(debtor.name, 510, 340)
-            love.graphics.print("Required Pin: " .. debtor.pin, 575, 465)
-            love.graphics.print("Inserted Pin: " .. debtor.enteredPin, 575, 490) 
+            love.graphics.print("occupation: " .. debtor.occupation .."\n".. "Sector: " .. debtor.sectorRegion, 450, 358)
             love.graphics.print(debtor.balance, 540, 405)
             love.graphics.print(debtor.debtAmount, 540, 435)
             love.graphics.print("Press [Y] to accept", 400, 465)

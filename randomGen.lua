@@ -29,6 +29,23 @@ local cardColors = {
     {card = "sprites/BlueCard.png", details = "sprites/CardDetailsBlue.png"}
 }
 
+local occupations = {
+    "Algorithm Ethics Auditor", "Synthetic Identity Broker", "Deepfake Content Strategist",
+    "Neural Experience Designer", "Biohacking Consultant", "Surveillance Countermeasure Specialist",
+    "Cryptocurrency Laundering Advisor", "Autonomous Drone Swarm Operator", "AI Companion Trainer",
+    "Black Market Data Miner", "Augmented Reality Blacksmith", "Neuro-Influencer", "Virtual Black Market Curator",
+    "AI-Powered Scam Scriptwriter", "Genetic Profile Forger", "Cybernetic Implant Installer", "Digital Memory Dealer",
+    "Emotion Manipulation Engineer", "Smart City Saboteur", "Quantum Encryption Cracker"
+}
+
+local sectorRegions = {
+    "Neon Sprawl", "Ashen Heights", "Crimson Sector",
+    "Vault City Delta", "Obsidian Ring", "Synth Hollow",
+    "Carbon District", "Echo Basin", "Zircon Verge",
+    "Havoc Row", "Phantom Precinct", "Ironlight Core",
+    "Nova Shard", "Grimegate Zone", "Circuit Haven"
+}
+
 local pinData = {
     {pin = 1234, enteredPin = 1234},
     {pin = 7345, enteredPin = 7346},
@@ -38,7 +55,8 @@ local pinData = {
 
 local function getRandomDebiter()
     local name = names[math.random(#names)]
-    local pin = pinData[math.random(#pinData)]
+    local occupation = occupations[math.random(#occupations)]
+    local sectorRegion = sectorRegions[math.random(#sectorRegions)]
     local balance = math.random(1000, 10000)
     local debtAmount = math.random(1000, 10000)
     local characterId = math.random(1, 5)
@@ -46,8 +64,8 @@ local function getRandomDebiter()
 
     return {
         name = name,
-        pin = pin.pin,
-        enteredPin = pin.enteredPin,
+        occupation = occupation,
+        sectorRegion = sectorRegion,
         balance = balance,
         debtAmount = debtAmount,
         characterPath = "sprites/Character(" .. characterId .. ").png",
